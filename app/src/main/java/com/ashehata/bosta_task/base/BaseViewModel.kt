@@ -1,10 +1,15 @@
 package com.ashehata.bosta_task.base
 
+import android.media.MediaDrm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State : BaseState>
     : ViewModel() {
@@ -22,7 +27,6 @@ abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State
 
     private val _event = MutableSharedFlow<Event>()
     private val event get() = _event.asSharedFlow()
-
 
     init {
         subscribeEvents()
@@ -72,6 +76,12 @@ abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State
     abstract fun handleEvents(event: Event)
     fun consumeState() {
         setState { null }
+    }
+
+    protected fun launchCoroutine(customContext: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> Unit): Job {
+        return viewModelScope.launch(customContext) {
+            block()
+        }
     }
 
 }

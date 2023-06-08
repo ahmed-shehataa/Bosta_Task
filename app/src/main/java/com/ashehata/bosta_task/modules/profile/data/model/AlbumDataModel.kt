@@ -5,5 +5,10 @@ import com.squareup.moshi.Json
 
 @Keep
 data class AlbumDataModel(
-   val name: String
+    @Json(name = "userId")
+    val userId: Int? = null,
+    @Json(name = "id")
+    val id: Int? = null,
+    @Json(name = "title")
+    val title: String? = null,
 )

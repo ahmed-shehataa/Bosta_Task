@@ -1,5 +1,5 @@
 # Bosta-Task
-Simple app with 3 screens with clean arch and last tech in android.
+Simple app with 3 screens implemented using clean arch and last tech in android.
 
 ## ScreenShots:
 <p align="center">
@@ -27,7 +27,6 @@ Simple app with 3 screens with clean arch and last tech in android.
 ## Features
 - Obfuscation
 - Simple UI
-- Animations
 - Config changes handling
 
 ## Tools & APIs

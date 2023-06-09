@@ -5,5 +5,6 @@ class ApiPaths {
     companion object {
         const val ALBUMS = "albums"
         const val USERS = "users"
+        const val PHOTOS = "photos"
     }
 }

@@ -20,18 +20,12 @@ import com.ashehata.bosta_task.modules.profile.presentation.model.UserUIModel
 fun ProfileScreenContent(
     user: UserUIModel?,
     albums: List<AlbumUIModel?>,
-    onAlbumClicked: (Int) -> Unit
+    onAlbumClicked: (AlbumUIModel) -> Unit
 ) {
 
     Column {
 
         AppBar(
-            modifier = Modifier.padding(
-                top = 12.dp,
-                start = 20.dp,
-                end = 20.dp,
-                bottom = 8.dp
-            ),
             title = stringResource(id = R.string.profile),
             extraBody = {
                 Text(

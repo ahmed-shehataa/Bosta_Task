@@ -1,0 +1,37 @@
+package com.ashehata.bosta_task.common.presentation
+
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import com.ashehata.bosta_task.base.BaseViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+
+
+@Composable
+fun <State, VM : BaseViewModel<*, *, *>> GeneralObservers(
+    viewModel: VM,
+    current: (state: State) -> Unit
+) {
+    viewModel.state.CollectAsEffect {
+        viewModel.consumeState()
+        Log.d("Compose_Trial", "GeneralObservers: ${it} and compose = ")
+        (it as? State)?.let { state ->
+            current.invoke(state)
+        }
+    }
+}
+
+@Composable
+fun <T> Flow<T>.CollectAsEffect(
+    context: CoroutineContext = EmptyCoroutineContext,
+    block: (T) -> Unit
+) {
+    LaunchedEffect(true) {
+        onEach(block).flowOn(context).launchIn(this)
+    }
+}

@@ -34,6 +34,7 @@ Simple app with 3 screens implemented using clean arch and last tech in android.
 - Clean architecture
 - Jetpack Compose
 - Compose navigation with (Compose Destinations)
+- Dagger hilt
 - MVVM + MVI arch pattern
 - Coroutines
 - Channels & flows

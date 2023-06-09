@@ -10,11 +10,11 @@ import com.ashehata.bosta_task.modules.profile.presentation.model.AlbumUIModel
 import com.ashehata.bosta_task.modules.profile.presentation.model.UserUIModel
 
 sealed class ProfileEvent : BaseEvent {
-    data class OpenAlbumDetailsScreen(val id: Int) : ProfileEvent()
+    data class OpenAlbumDetailsScreen(val albumUIModel: AlbumUIModel) : ProfileEvent()
 }
 
 sealed class ProfileState : BaseState {
-    class OpenAlbumDetailsScreen(val id: Int) : ProfileState()
+    class OpenAlbumDetailsScreen(val id: Int, val albumName: String) : ProfileState()
 }
 
 data class ProfileViewState(

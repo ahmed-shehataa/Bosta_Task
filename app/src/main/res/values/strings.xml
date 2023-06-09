@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bosta_Task</string>
     <string name="profile">Profile</string>
+    <string name="search_images">Search in images..</string>
 </resources>

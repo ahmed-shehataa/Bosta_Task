@@ -4,10 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ashehata.bosta_task.common.presentation.GeneralObservers
+import com.ashehata.bosta_task.modules.album_details.presentation.args.AlbumDetailsScreenNavArgs
 import com.ashehata.bosta_task.modules.destinations.AlbumDetailsScreenDestination
 import com.ashehata.bosta_task.modules.profile.presentation.contract.ProfileEvent
 import com.ashehata.bosta_task.modules.profile.presentation.contract.ProfileState
 import com.ashehata.bosta_task.modules.profile.presentation.contract.ProfileViewState
+import com.ashehata.bosta_task.modules.profile.presentation.model.AlbumUIModel
 import com.ashehata.bosta_task.modules.profile.presentation.viewModel.ProfileViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -32,7 +34,7 @@ fun ProfileScreen(
         viewStates.albums
     }
 
-    val onAlbumClicked: (Int) -> Unit = remember {
+    val onAlbumClicked: (AlbumUIModel) -> Unit = remember {
         {
             viewModel.setEvent(ProfileEvent.OpenAlbumDetailsScreen(it))
         }
@@ -47,7 +49,13 @@ fun ProfileScreen(
     GeneralObservers<ProfileState, ProfileViewModel>(viewModel = viewModel) {
         when (it) {
             is ProfileState.OpenAlbumDetailsScreen -> {
-                navigator.navigate(AlbumDetailsScreenDestination)
+                navigator.navigate(
+                    AlbumDetailsScreenDestination(
+                        AlbumDetailsScreenNavArgs(
+                            it.id, it.albumName
+                        )
+                    )
+                )
             }
         }
     }

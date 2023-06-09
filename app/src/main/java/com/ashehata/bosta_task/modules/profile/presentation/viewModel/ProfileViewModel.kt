@@ -34,7 +34,10 @@ class ProfileViewModel @Inject constructor(
     override fun handleEvents(event: ProfileEvent) {
         when (event) {
             is ProfileEvent.OpenAlbumDetailsScreen -> setState {
-                ProfileState.OpenAlbumDetailsScreen(event.id)
+                ProfileState.OpenAlbumDetailsScreen(
+                    id = event.albumUIModel.id ?: -1,
+                    albumName = event.albumUIModel.title ?: ""
+                )
             }
         }
     }

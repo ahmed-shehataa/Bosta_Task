@@ -17,7 +17,7 @@ import com.ashehata.bosta_task.modules.profile.presentation.model.AlbumUIModel
 fun AlbumItem(
     albumModel: AlbumUIModel,
     hasDivider: Boolean,
-    onAlbumClicked: (Int) -> Unit
+    onAlbumClicked: (AlbumUIModel) -> Unit
 ) {
 
     Column(
@@ -28,7 +28,7 @@ fun AlbumItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    onAlbumClicked(albumModel.id ?: -1)
+                    onAlbumClicked(albumModel)
                 }
                 .padding(vertical = 8.dp, horizontal = 20.dp),
             text = albumModel.title ?: "",

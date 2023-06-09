@@ -5,7 +5,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import com.ashehata.bosta_task.common.presentation.AppBar
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.text.input.TextFieldValue
+import com.ashehata.bosta_task.common.presentation.compose.AppBar
+import com.ashehata.bosta_task.common.presentation.compose.HeaderShadow
+import com.ashehata.bosta_task.common.presentation.compose.SearchView
 import com.ashehata.bosta_task.modules.album_details.presentation.model.PhotoUIModel
 
 
@@ -13,18 +17,24 @@ import com.ashehata.bosta_task.modules.album_details.presentation.model.PhotoUIM
 fun AlbumDetailsScreenContent(
     photos: List<PhotoUIModel?>,
     onPhotoClicked: (String?) -> Unit,
-    albumName: String
+    albumName: String,
+    onBackPressed: () -> Unit,
+    onSearch: (String) -> Unit,
+    searchTextState: MutableState<TextFieldValue>,
 ) {
 
     Column {
 
-        AppBar(
-            title = albumName,
-            extraBody = {
-
-            }
-        )
-
+        HeaderShadow {
+            AppBar(
+                title = albumName,
+                hasBackButton = true,
+                onBackPressed = onBackPressed,
+                extraBody = {
+                    SearchView(searchTextState, onSearch)
+                }
+            )
+        }
 
         LazyVerticalGrid(columns = GridCells.Fixed(3)) {
 

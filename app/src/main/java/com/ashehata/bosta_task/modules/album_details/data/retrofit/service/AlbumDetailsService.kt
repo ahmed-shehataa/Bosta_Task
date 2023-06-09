@@ -9,8 +9,5 @@ import retrofit2.http.Query
 interface AlbumDetailsService {
 
     @GET(ApiPaths.PHOTOS)
-    suspend fun getPhotos(
-        @Query("albumId") albumId: Int,
-        @Query("searchTitle") searchTitle: String = "",
-    ): List<PhotoDataModel>?
+    suspend fun getPhotos(@Query("albumId") albumId: Int): List<PhotoDataModel>?
 }

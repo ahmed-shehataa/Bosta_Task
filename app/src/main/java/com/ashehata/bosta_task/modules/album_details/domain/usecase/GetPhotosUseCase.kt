@@ -10,9 +10,8 @@ class GetPhotosUseCase @Inject constructor(
 
     suspend fun execute(
         albumId: Int,
-        searchTitle: String = ""
     ): List<PhotoDomainModel> {
-        return albumDetailsRepository.getPhotos(albumId, searchTitle)
+        return albumDetailsRepository.getPhotos(albumId)
     }
 
 }

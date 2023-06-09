@@ -8,7 +8,7 @@ class AlbumDetailsRemoteDataSourceImpl @Inject constructor(
     private val service: AlbumDetailsService
 ) : AlbumDetailsRemoteDataSource {
 
-    override suspend fun getPhotos(albumId: Int, searchTitle: String): List<PhotoDataModel> {
-        return service.getPhotos(albumId, searchTitle) ?: emptyList()
+    override suspend fun getPhotos(albumId: Int): List<PhotoDataModel> {
+        return service.getPhotos(albumId) ?: emptyList()
     }
 }

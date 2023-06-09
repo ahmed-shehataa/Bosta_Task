@@ -4,6 +4,6 @@ import com.ashehata.bosta_task.modules.album_details.domain.model.PhotoDomainMod
 
 interface AlbumDetailsRepository {
 
-    suspend fun getPhotos(albumId: Int, searchTitle: String): List<PhotoDomainModel>
+    suspend fun getPhotos(albumId: Int): List<PhotoDomainModel>
 
 }

@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ashehata.bosta_task.R
-import com.ashehata.bosta_task.common.presentation.AppBar
+import com.ashehata.bosta_task.common.presentation.compose.AppBar
+import com.ashehata.bosta_task.common.presentation.compose.HeaderShadow
 import com.ashehata.bosta_task.modules.profile.presentation.model.AlbumUIModel
 import com.ashehata.bosta_task.modules.profile.presentation.model.UserUIModel
 
@@ -25,23 +26,31 @@ fun ProfileScreenContent(
 
     Column {
 
-        AppBar(
-            title = stringResource(id = R.string.profile),
-            extraBody = {
-                Text(
-                    text = user?.name ?: "",
-                    style = MaterialTheme.typography.body1.copy(
-                        color = MaterialTheme.colors.onSecondary
+        HeaderShadow {
+            AppBar(
+                Modifier.padding(
+                    top = 12.dp,
+                    end = 20.dp,
+                    start = 20.dp
+                ),
+                title = stringResource(id = R.string.profile),
+                extraBody = {
+                    Text(
+                        text = user?.name ?: "",
+                        style = MaterialTheme.typography.body1.copy(
+                            color = MaterialTheme.colors.onSecondary
+                        )
                     )
-                )
-                Text(
-                    text = user?.address ?: "",
-                    style = MaterialTheme.typography.body1.copy(
-                        color = MaterialTheme.colors.onSecondary
+                    Text(
+                        text = user?.address ?: "",
+                        style = MaterialTheme.typography.body1.copy(
+                            color = MaterialTheme.colors.onSecondary
+                        )
                     )
-                )
-            }
-        )
+                },
+            )
+        }
+
 
         LazyColumn {
 

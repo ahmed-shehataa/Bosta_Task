@@ -11,8 +11,8 @@ class AlbumDetailsRepositoryImpl @Inject constructor(
     private val remote: AlbumDetailsRemoteDataSource
 ) : AlbumDetailsRepository {
 
-    override suspend fun getPhotos(albumId: Int, searchTitle: String): List<PhotoDomainModel> {
-        return remote.getPhotos(albumId, searchTitle).map { it.toDomainModel() }
+    override suspend fun getPhotos(albumId: Int): List<PhotoDomainModel> {
+        return remote.getPhotos(albumId).map { it.toDomainModel() }
     }
 
 

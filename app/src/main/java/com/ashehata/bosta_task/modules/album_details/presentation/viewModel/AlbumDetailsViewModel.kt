@@ -22,16 +22,32 @@ class AlbumDetailsViewModel @Inject constructor(
             viewStates?.let {
                 val args = AlbumDetailsScreenDestination.argsFrom(savedStateHandle)
                 it.albumName = args.albumName
-                it.photos.clear()
-                it.photos.addAll(getPhotosUseCase.execute(albumId = args.id).map { it.toUIModel() })
+                val photos = getPhotosUseCase.execute(albumId = args.id).map { it.toUIModel() }
+                it.filteredPhotos.clear()
+                it.filteredPhotos.addAll(photos)
+                it.allPhotos.addAll(photos)
             }
         }
     }
 
     override fun handleEvents(event: AlbumDetailsEvent) {
         when (event) {
-            is AlbumDetailsEvent.OpenPhotoViewerScreen -> setState {
-                AlbumDetailsState.OpenAlbumDetailsScreen(event.url)
+            is AlbumDetailsEvent.OnPhotoClicked -> setState {
+                AlbumDetailsState.OpenImageViewerScreen(event.url)
+            }
+            is AlbumDetailsEvent.OnSearch -> {
+                if (event.name.trim().isEmpty()) {
+                    viewStates?.filteredPhotos?.clear()
+                    viewStates?.filteredPhotos?.addAll(viewStates?.allPhotos ?: emptyList())
+                } else {
+                    val resultPhotos =
+                        viewStates?.allPhotos?.filter { it?.title?.contains(event.name) ?: false }
+                            ?: emptyList()
+
+                    viewStates?.filteredPhotos?.clear()
+                    viewStates?.filteredPhotos?.addAll(resultPhotos)
+                }
+
             }
         }
     }

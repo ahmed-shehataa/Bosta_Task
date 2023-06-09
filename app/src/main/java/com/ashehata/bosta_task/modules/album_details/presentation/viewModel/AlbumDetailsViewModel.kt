@@ -18,14 +18,21 @@ class AlbumDetailsViewModel @Inject constructor(
 ) : BaseViewModel<AlbumDetailsEvent, AlbumDetailsViewState, AlbumDetailsState>() {
 
     init {
+        getPhotos()
+    }
+
+    private fun getPhotos() {
         launchCoroutine {
             viewStates?.let {
                 val args = AlbumDetailsScreenDestination.argsFrom(savedStateHandle)
                 it.albumName = args.albumName
+
+                setLoading()
                 val photos = getPhotosUseCase.execute(albumId = args.id).map { it.toUIModel() }
                 it.filteredPhotos.clear()
                 it.filteredPhotos.addAll(photos)
                 it.allPhotos.addAll(photos)
+                setDoneLoading()
             }
         }
     }
@@ -48,6 +55,9 @@ class AlbumDetailsViewModel @Inject constructor(
                     viewStates?.filteredPhotos?.addAll(resultPhotos)
                 }
 
+            }
+            AlbumDetailsEvent.RefreshScreen -> {
+                getPhotos()
             }
         }
     }

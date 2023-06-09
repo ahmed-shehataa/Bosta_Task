@@ -8,10 +8,12 @@ import com.ashehata.bosta_task.base.BaseEvent
 import com.ashehata.bosta_task.base.BaseState
 import com.ashehata.bosta_task.base.BaseViewState
 import com.ashehata.bosta_task.modules.album_details.presentation.model.PhotoUIModel
+import com.ashehata.bosta_task.modules.profile.presentation.contract.ProfileEvent
 
 sealed class AlbumDetailsEvent : BaseEvent {
     data class OnPhotoClicked(val url: String?) : AlbumDetailsEvent()
     data class OnSearch(val name: String) : AlbumDetailsEvent()
+    object RefreshScreen : AlbumDetailsEvent()
 }
 
 sealed class AlbumDetailsState : BaseState {

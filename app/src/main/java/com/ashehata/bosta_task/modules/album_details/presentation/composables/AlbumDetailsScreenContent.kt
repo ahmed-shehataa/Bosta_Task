@@ -7,9 +7,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.text.input.TextFieldValue
-import com.ashehata.bosta_task.common.presentation.compose.AppBar
-import com.ashehata.bosta_task.common.presentation.compose.HeaderShadow
-import com.ashehata.bosta_task.common.presentation.compose.SearchView
+import com.ashehata.bosta_task.common.presentation.compose.*
 import com.ashehata.bosta_task.modules.album_details.presentation.model.PhotoUIModel
 
 
@@ -21,6 +19,9 @@ fun AlbumDetailsScreenContent(
     onBackPressed: () -> Unit,
     onSearch: (String) -> Unit,
     searchTextState: MutableState<TextFieldValue>,
+    isLoading: Boolean,
+    isNetworkError: Boolean,
+    onRefresh: () -> Unit,
 ) {
 
     Column {
@@ -36,18 +37,27 @@ fun AlbumDetailsScreenContent(
             )
         }
 
-        LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+        if (isNetworkError) {
+            NetworkErrorView(onRefresh)
 
-            items(
-                items = photos,
-                key = { item: PhotoUIModel? ->
-                    item?.id ?: -1
-                },
-            ) { photo ->
-                PhotoItem(photo, onPhotoClicked)
+        } else if (isLoading) {
+            LoadingView()
+
+        } else {
+            LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+
+                items(
+                    items = photos,
+                    key = { item: PhotoUIModel? ->
+                        item?.id ?: -1
+                    },
+                ) { photo ->
+                    PhotoItem(photo, onPhotoClicked)
+                }
+
             }
-
         }
+
     }
 
 

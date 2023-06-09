@@ -11,15 +11,17 @@ import com.ashehata.bosta_task.modules.profile.presentation.model.UserUIModel
 
 sealed class ProfileEvent : BaseEvent {
     data class OpenAlbumDetailsScreen(val albumUIModel: AlbumUIModel) : ProfileEvent()
+    object RefreshScreen : ProfileEvent()
 }
 
 sealed class ProfileState : BaseState {
-    class OpenAlbumDetailsScreen(val id: Int, val albumName: String) : ProfileState()
+    data class OpenAlbumDetailsScreen(val id: Int, val albumName: String) : ProfileState()
 }
 
 data class ProfileViewState(
-    override val networkError: MutableState<Boolean> = mutableStateOf(false),
+    override val isNetworkError: MutableState<Boolean> = mutableStateOf(false),
     override val isRefreshing: MutableState<Boolean> = mutableStateOf(false),
+    override val isLoading: MutableState<Boolean> = mutableStateOf(false),
     val user: MutableState<UserUIModel?> = mutableStateOf(
         null
     ),

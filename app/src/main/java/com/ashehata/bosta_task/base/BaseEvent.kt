@@ -8,5 +8,6 @@ interface BaseState
 
 interface BaseViewState {
     val isRefreshing: MutableState<Boolean>
-    val networkError: MutableState<Boolean>
+    val isNetworkError: MutableState<Boolean>
+    val isLoading: MutableState<Boolean>
 }

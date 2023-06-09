@@ -34,16 +34,40 @@ fun ProfileScreen(
         viewStates.albums
     }
 
+    val isLoading = remember {
+        viewStates.isLoading
+    }
+
+    val isRefreshing = remember {
+        viewStates.isRefreshing
+    }
+
+
+    val isNetworkError = remember {
+        viewStates.isNetworkError
+    }
+
     val onAlbumClicked: (AlbumUIModel) -> Unit = remember {
         {
             viewModel.setEvent(ProfileEvent.OpenAlbumDetailsScreen(it))
         }
     }
 
+    val onRefresh = remember {
+        {
+            viewModel.setEvent(ProfileEvent.RefreshScreen)
+        }
+    }
+
+
     ProfileScreenContent(
         user = user.value,
         albums = albums,
-        onAlbumClicked = onAlbumClicked
+        isLoading = isLoading.value,
+        isRefreshing = isRefreshing.value,
+        isNetworkError = isNetworkError.value,
+        onAlbumClicked = onAlbumClicked,
+        onRefresh = onRefresh
     )
 
     GeneralObservers<ProfileState, ProfileViewModel>(viewModel = viewModel) {

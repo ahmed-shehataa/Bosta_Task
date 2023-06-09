@@ -19,8 +19,9 @@ sealed class AlbumDetailsState : BaseState {
 }
 
 data class AlbumDetailsViewState(
-    override val networkError: MutableState<Boolean> = mutableStateOf(false),
+    override val isNetworkError: MutableState<Boolean> = mutableStateOf(false),
     override val isRefreshing: MutableState<Boolean> = mutableStateOf(false),
+    override val isLoading: MutableState<Boolean> = mutableStateOf(false),
     val allPhotos: MutableList<PhotoUIModel?> = SnapshotStateList(),
     val filteredPhotos: MutableList<PhotoUIModel?> = SnapshotStateList(),
     val searchTextState: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue()),

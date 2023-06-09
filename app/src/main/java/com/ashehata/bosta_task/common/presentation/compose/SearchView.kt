@@ -44,7 +44,6 @@ fun SearchView(
         )
     }
 
-    Log.i("SearchView: ", state.value.text.trim().isNotEmpty().toString())
     TextField(
         value = state.value,
         onValueChange = { value ->

@@ -1,6 +1,5 @@
 package com.ashehata.bosta_task.base
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -43,9 +42,6 @@ abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State
         subscribeEvents()
     }
 
-    /**
-     * Start listening to Event
-     */
     private fun subscribeEvents() {
         viewModelScope.launch {
             event.collect {
@@ -54,13 +50,8 @@ abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State
         }
     }
 
-    /**
-     * Set new Event
-     */
     fun setEvent(event: Event) {
         viewModelScope.launch {
-
-            Log.d("MVI_Practice", "setEvent subscriptionCount: ${_event.subscriptionCount.value}")
             _event.emit(event)
         }
     }

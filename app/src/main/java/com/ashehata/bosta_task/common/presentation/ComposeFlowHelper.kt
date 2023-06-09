@@ -19,7 +19,6 @@ fun <State, VM : BaseViewModel<*, *, *>> GeneralObservers(
 ) {
     viewModel.state.CollectAsEffect {
         viewModel.consumeState()
-        Log.d("Compose_Trial", "GeneralObservers: ${it} and compose = ")
         (it as? State)?.let { state ->
             current.invoke(state)
         }

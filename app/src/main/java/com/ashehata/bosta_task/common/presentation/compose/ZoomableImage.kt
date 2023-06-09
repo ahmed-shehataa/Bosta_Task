@@ -21,8 +21,9 @@ import coil.request.ImageRequest
 
 @Composable
 fun ZoomableImage(url: String?) {
+
     val scale = remember { mutableStateOf(1f) }
-    val rotationState = remember { mutableStateOf(1f) }
+
     Box(
         modifier = Modifier
             .clip(RectangleShape)

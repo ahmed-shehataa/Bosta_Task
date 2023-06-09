@@ -11,10 +11,10 @@ class ProfileRemoteDataSourceImpl @Inject constructor(
 ) : ProfileRemoteDataSource {
 
     override suspend fun getUsers(): List<UserDataModel> {
-        return service.getUsers().firstOrNull()?.users ?: emptyList()
+        return service.getUsers() ?: emptyList()
     }
 
     override suspend fun getAlbums(userId: Int): List<AlbumDataModel> {
-        return service.getAlbums(userId).albums ?: emptyList()
+        return service.getAlbums(userId) ?: emptyList()
     }
 }

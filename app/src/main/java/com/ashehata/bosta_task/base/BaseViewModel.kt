@@ -57,7 +57,7 @@ abstract class BaseViewModel<Event : BaseEvent, ViewState : BaseViewState, State
     /**
      * Set new Ui State
      */
-    private fun setState(builder: () -> State?) {
+    fun setState(builder: () -> State?) {
         viewModelScope.launch {
             _state.emit(builder())
         }

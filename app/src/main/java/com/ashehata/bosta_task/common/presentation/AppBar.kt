@@ -7,17 +7,19 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
 @Composable
 fun AppBar(
+    modifier: Modifier = Modifier,
     title: String,
     hasSearchBar: Boolean = false,
     hasDivider: Boolean = false,
     extraBody: @Composable (ColumnScope) -> Unit = {}
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
 
         Text(
             text = title,

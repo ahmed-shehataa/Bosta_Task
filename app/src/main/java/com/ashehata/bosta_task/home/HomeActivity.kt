@@ -3,8 +3,9 @@ package com.ashehata.bosta_task.home
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.ashehata.bosta_task.modules.profile.presentation.ProfileScreen
+import com.ashehata.bosta_task.modules.NavGraphs
 import com.ashehata.bosta_task.ui.theme.AppTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,7 +14,9 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                ProfileScreen()
+                DestinationsNavHost(
+                    navGraph = NavGraphs.root
+                )
             }
         }
     }

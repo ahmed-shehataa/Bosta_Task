@@ -2,6 +2,7 @@ package com.ashehata.bosta_task.modules.profile.presentation.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -85,7 +86,8 @@ fun ProfileScreenContent(
 
             } else {
 
-                LazyColumn {
+                LazyColumn(contentPadding = PaddingValues(top = 12.dp)) {
+
                     itemsIndexed(albums) { index, album ->
                         album?.let {
                             AlbumItem(

@@ -55,6 +55,9 @@ class ProfileViewModel @Inject constructor(
 
                 it.albums.clear()
                 it.albums.addAll(albumsList)
+                it.albums.addAll(albumsList)
+                it.albums.addAll(albumsList)
+                it.albums.addAll(albumsList)
                 setDoneLoading()
             }
         }

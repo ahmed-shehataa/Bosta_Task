@@ -8,10 +8,12 @@ import com.ashehata.bosta_task.base.BaseEvent
 import com.ashehata.bosta_task.base.BaseState
 import com.ashehata.bosta_task.base.BaseViewState
 import com.ashehata.bosta_task.modules.album_details.presentation.model.PhotoUIModel
+import com.ashehata.bosta_task.modules.profile.presentation.contract.ProfileEvent
 
 sealed class AlbumDetailsEvent : BaseEvent {
     data class OnPhotoClicked(val url: String?) : AlbumDetailsEvent()
     data class OnSearch(val name: String) : AlbumDetailsEvent()
+    object RefreshScreen : AlbumDetailsEvent()
 }
 
 sealed class AlbumDetailsState : BaseState {
@@ -19,8 +21,9 @@ sealed class AlbumDetailsState : BaseState {
 }
 
 data class AlbumDetailsViewState(
-    override val networkError: MutableState<Boolean> = mutableStateOf(false),
+    override val isNetworkError: MutableState<Boolean> = mutableStateOf(false),
     override val isRefreshing: MutableState<Boolean> = mutableStateOf(false),
+    override val isLoading: MutableState<Boolean> = mutableStateOf(false),
     val allPhotos: MutableList<PhotoUIModel?> = SnapshotStateList(),
     val filteredPhotos: MutableList<PhotoUIModel?> = SnapshotStateList(),
     val searchTextState: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue()),

@@ -37,6 +37,20 @@ fun AlbumDetailsScreen(
         viewStates.searchTextState
     }
 
+    val isLoading = remember {
+        viewStates.isLoading
+    }
+
+    val isNetworkError = remember {
+        viewStates.isNetworkError
+    }
+
+    val onRefresh = remember {
+        {
+            viewModel.setEvent(AlbumDetailsEvent.RefreshScreen)
+        }
+    }
+
     val onPhotoClicked: (String?) -> Unit = remember {
         {
             viewModel.setEvent(AlbumDetailsEvent.OnPhotoClicked(it))
@@ -63,7 +77,10 @@ fun AlbumDetailsScreen(
         searchTextState = searchTextState,
         onPhotoClicked = onPhotoClicked,
         onBackPressed = onBackPressed,
-        onSearch = onSearch
+        onSearch = onSearch,
+        isLoading = isLoading.value,
+        isNetworkError = isNetworkError.value,
+        onRefresh = onRefresh
     )
 
     GeneralObservers<AlbumDetailsState, AlbumDetailsViewModel>(viewModel = viewModel) {
